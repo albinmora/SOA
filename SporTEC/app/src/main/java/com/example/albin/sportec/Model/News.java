@@ -3,34 +3,43 @@ package com.example.albin.sportec.Model;
 public class News{
 
     // Members variables
-    private String mId;
-    private String mTitle;
-    private String mDate;
-    private String mNewsDody;
+    private Long id;
+    private String title;
+    private String date;
+    private String body;
+    private String image;
 
     //Getters
-    public String getId() {
-        return mId;
+    public Long getId() {
+        return id;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 
     public String getDate() {
-        return mDate;
+        return date;
     }
 
-    public String getNewsDody() {
-        return mNewsDody;
+    public String getBody() {
+        return body;
     }
 
     //Constructor
-    public News(String pId,String pTitle, String pDate, String pNewsDody){
-        this.mId = pId;
-        this.mTitle = pTitle;
-        this.mDate = pDate;
-        this.mNewsDody = pNewsDody;
+    public News(Long pId,String pTitle, String pDate, String pDody, String pImage){
+        this.id = pId;
+        this.title = pTitle;
+        this.date = pDate;
+        this.body = pDody;
+        this.image = pImage;
     }
 
+    public News(){
+
+    }
 }

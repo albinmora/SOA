@@ -52,12 +52,12 @@ public class NewsListAdapter extends ArrayAdapter<News> {
         return convertView;
     }
 
-    private Bitmap getBitmapFromAsset(String productId) {
+    private Bitmap getBitmapFromAsset(Long productId) {
         AssetManager assetManager = getContext().getAssets();
         InputStream stream = null;
 
         try {
-            stream = assetManager.open("jacket101.png");
+            stream = assetManager.open("f1.jpg");
             return BitmapFactory.decodeStream(stream);
         } catch (IOException e) {
             e.printStackTrace();

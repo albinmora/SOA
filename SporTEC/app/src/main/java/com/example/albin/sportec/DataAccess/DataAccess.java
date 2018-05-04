@@ -1,6 +1,8 @@
 package com.example.albin.sportec.DataAccess;
 
 import com.example.albin.sportec.Model.News;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +11,11 @@ import java.util.Map;
 
 public class DataAccess {
 
+
+
     public static List<News> productList = new ArrayList<>();
     public static Map<String, News> productMap = new HashMap<>();
+
 
     static {
 
@@ -20,7 +25,7 @@ public class DataAccess {
                 35);
 
         addProduct("jacket101",
-                "Bamboo thermal ski coat",
+                "Bamboo thermal skit",
                 "You’ll be the most environmentally conscious skier on the slopes - and the most stylish - wearing our fitted bamboo thermal ski coat, made from organic bamboo with recycled plastic down filling.",
                 128);
 
@@ -82,12 +87,15 @@ public class DataAccess {
 
     private static void addProduct(String itemId, String name,
                                    String description, int price) {
-        News item = new News(itemId, name, description, ""+price);
+        Long l = 0L;
+        News item = new News(l, name, ""+price, description,"");
         productList.add(item);
         productMap.put(itemId, item);
     }
 
     public static List<String> getProductNames() {
+        // Write a message to the database
+
         List<String> list = new ArrayList<>();
         for (News product : productList) {
             list.add(product.getTitle());
@@ -99,9 +107,9 @@ public class DataAccess {
 
         List<News> filteredList = new ArrayList<>();
         for (News product : productList) {
-            if (product.getId().contains(searchString)) {
+           /*if (product.getId().contains(searchString)) {
                 filteredList.add(product);
-            }
+            }*/
         }
         return filteredList;
 
