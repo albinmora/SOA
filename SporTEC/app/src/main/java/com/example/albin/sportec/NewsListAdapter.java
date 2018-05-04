@@ -46,18 +46,18 @@ public class NewsListAdapter extends ArrayAdapter<News> {
         priceText.setText(date);
 
         ImageView iv = (ImageView) convertView.findViewById(R.id.imgView);
-        Bitmap bitmap = getBitmapFromAsset(newN.getId());
+        Bitmap bitmap = getBitmapFromAsset(newN.getImage());
         iv.setImageBitmap(bitmap);
 
         return convertView;
     }
 
-    private Bitmap getBitmapFromAsset(Long productId) {
+    private Bitmap getBitmapFromAsset(String pImg) {
         AssetManager assetManager = getContext().getAssets();
         InputStream stream = null;
 
         try {
-            stream = assetManager.open("f1.jpg");
+            stream = assetManager.open(pImg);
             return BitmapFactory.decodeStream(stream);
         } catch (IOException e) {
             e.printStackTrace();

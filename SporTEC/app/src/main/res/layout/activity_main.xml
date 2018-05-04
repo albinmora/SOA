@@ -16,12 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="fitXY"
-            android:src="@drawable/f1"/>
+            android:src="@drawable/mundial"/>
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:divider="#EEEEEE"
+            android:dividerHeight="4dp">
         </ListView>
     </LinearLayout>
 
