@@ -1,14 +1,20 @@
 package com.example.albin.sportec;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.albin.sportec.DataAccess.DataAccess;
+import com.example.albin.sportec.Model.NavBarItem;
 import com.example.albin.sportec.Model.News;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,10 +23,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+
+
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -29,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String PRODUCT_ID = "PRODUCT_ID";
     private List<News> newsList;
+    private  DrawerLayout drawer;
+    private  TextView placeHolderText;
+    private  MenuItem accountMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +101,59 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        inflateViews();
+
+
+
     }
 
+    private void inflateViews(){
+        //placeHolderText = (TextView) findViewById(R.id.placeholder_text);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        setNavBarButtons();
+    };
+
+    private void setNavBarButtons(){
+        for (NavBarItem item : NavBarItem.values()) {
+            TextView itemView = (TextView) findViewById(item.getItemId());
+            itemView.setOnClickListener(this);
+        }
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        drawer.closeDrawer(GravityCompat.START);
+        return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (NavBarItem.fromViewId(view.getId())) {
+
+            case SETTINGS:
+                break;
+
+            case FACEBOOK:
+                break;
+
+            case TWITTER:
+                break;
+
+            case GOOGLE_PHOTOS:
+                drawer.closeDrawer(GravityCompat.START);
+                accountMenu.setVisible(true);
+                break;
+        }
+    }
 }
