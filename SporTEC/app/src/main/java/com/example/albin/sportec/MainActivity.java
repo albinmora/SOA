@@ -141,18 +141,25 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View view) {
         switch (NavBarItem.fromViewId(view.getId())) {
 
-            case SETTINGS:
+            case MAIN:
                 break;
 
-            case FACEBOOK:
-                break;
-
-            case TWITTER:
-                break;
-
-            case GOOGLE_PHOTOS:
+            case SPORT:
                 drawer.closeDrawer(GravityCompat.START);
-                accountMenu.setVisible(true);
+                Intent intent = new Intent(MainActivity.this, SportActivity.class);
+                startActivity(intent);
+                break;
+            case HISTORY:
+                break;
+
+            case CHALLENGE:
+                drawer.closeDrawer(GravityCompat.START);
+                //accountMenu.setVisible(true);
+                break;
+
+            case LOGOUT:
+                drawer.closeDrawer(GravityCompat.START);
+                //accountMenu.setVisible(true);
                 break;
         }
     }

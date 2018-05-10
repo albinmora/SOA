@@ -17,6 +17,7 @@
         android:layout_height="match_parent" />
 
 
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -34,35 +35,66 @@
 
 
             <TextView
-                android:id="@+id/google_photos"
+                android:id="@+id/m_main_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/nav_drawer_menu_item"
+                android:text="@string/main_screen"
+                android:drawableLeft="@drawable/main_icon"/>
 
-                />
 
 
+            <include layout="@layout/divider"/>
 
             <TextView
-                android:id="@+id/facebook"
+                android:id="@+id/m_sport_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                style="@style/nav_drawer_menu_item"
+                android:drawableLeft="@drawable/sport_icon"
+                android:text="@string/sport_screen"/>
 
+            <include layout="@layout/divider"/>
 
             <TextView
-                android:id="@+id/twitter"
+                android:id="@+id/m_history_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/nav_drawer_menu_item"
+                android:text="@string/history_screen"
+                android:drawableLeft="@drawable/history_icon"/>
 
-                />
-
+            <include layout="@layout/divider"/>
 
             <TextView
-                android:id="@+id/user_settings"
+                android:id="@+id/m_challenge_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/nav_drawer_menu_item"
+                android:text="@string/challenge_screen"
+                android:drawableLeft="@drawable/challenge_icon"/>
 
-                />
+            <include layout="@layout/divider"/>
+
+            <TextView
+                android:id="@+id/m_team_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/nav_drawer_menu_item"
+                android:text="@string/team_screen"
+                android:drawableLeft="@drawable/team_icon"/>
+
+            <include layout="@layout/divider"/>
+
+            <TextView
+                android:id="@+id/m_logout_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/nav_drawer_menu_item"
+                android:text="@string/logout"
+                android:drawableLeft="@drawable/exit_icon"/>
+
+
         </LinearLayout>
 
     </android.support.design.widget.NavigationView>

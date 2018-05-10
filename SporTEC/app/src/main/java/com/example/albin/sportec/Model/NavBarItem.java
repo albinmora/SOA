@@ -7,10 +7,12 @@ import com.example.albin.sportec.R;
  */
 
 public enum NavBarItem {
-    GOOGLE_PHOTOS(R.id.google_photos),
-    TWITTER(R.id.twitter),
-    FACEBOOK(R.id.facebook),
-    SETTINGS(R.id.user_settings);
+    MAIN(R.id.m_main_item),
+    SPORT(R.id.m_sport_item),
+    CHALLENGE(R.id.m_challenge_item),
+    HISTORY(R.id.m_history_item),
+    LOGOUT(R.id.m_logout_item);
+
 
     private int itemId;
     NavBarItem(int itemId) {
