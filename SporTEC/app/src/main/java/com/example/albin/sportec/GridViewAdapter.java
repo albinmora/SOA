@@ -52,8 +52,8 @@ public class GridViewAdapter extends BaseAdapter {
             listViewHolder = (ViewHolder)convertView.getTag();
         }
 
-        listViewHolder.textInListView.setText(listStorage.get(position).getContent());
-        int imageResourceId = this.context.getResources().getIdentifier(listStorage.get(position).getImageResource(), "drawable", this.context.getPackageName());
+        listViewHolder.textInListView.setText(listStorage.get(position).getSport());
+        int imageResourceId = this.context.getResources().getIdentifier(listStorage.get(position).getImage(), "drawable", this.context.getPackageName());
         listViewHolder.imageInListView.setImageResource(imageResourceId);
 
         return convertView;

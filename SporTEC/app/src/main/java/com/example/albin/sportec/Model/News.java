@@ -8,8 +8,12 @@ public class News{
     private String date;
     private String body;
     private String image;
+    private int dayNews;
 
     //Getters
+
+    public int getDayNews() { return dayNews; }
+
     public Long getId() {
         return id;
     }
@@ -31,8 +35,9 @@ public class News{
     }
 
     //Constructor
-    public News(Long pId,String pTitle, String pDate, String pDody, String pImage){
+    public News(Long pId,int pDayNews,String pTitle, String pDate, String pDody, String pImage){
         this.id = pId;
+        this.dayNews = pDayNews;
         this.title = pTitle;
         this.date = pDate;
         this.body = pDody;

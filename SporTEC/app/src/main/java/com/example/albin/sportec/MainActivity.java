@@ -1,6 +1,9 @@
 package com.example.albin.sportec;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,10 +13,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.albin.sportec.DataAccess.DataAccess;
 import com.example.albin.sportec.Model.NavBarItem;
 import com.example.albin.sportec.Model.News;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +40,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 
-
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,10 +54,13 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "MyActivity";
 
     public static final String PRODUCT_ID = "PRODUCT_ID";
+    public static final String SEARCH = "SEARCH";
+    private Long news_id;
     private List<News> newsList;
     private  DrawerLayout drawer;
     private  TextView placeHolderText;
     private  MenuItem accountMenu;
+    private  ImageView dayNewsImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +73,22 @@ public class MainActivity extends AppCompatActivity
         lv = (ListView) findViewById(R.id.listView);
         //lv.setAdapter(adapter);
 
+        dayNewsImage = (ImageView)findViewById(R.id.imgDayNews);
+
         String id = myRef.push().getKey();
+
+        Button btnBuscar= (Button) findViewById(R.id.btnBuscar);
+
+        btnBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+
+                EditText searchText = (EditText)findViewById(R.id.buscarEditText);
+                intent.putExtra(SEARCH, searchText.getText().toString());
+                startActivity(intent);
+            }
+        });
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -79,6 +103,15 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        dayNewsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NewsDetailActivity.class);
+                intent.putExtra(PRODUCT_ID, news_id);
+                startActivity(intent);
+            }
+        });
+
             myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -89,7 +122,17 @@ public class MainActivity extends AppCompatActivity
 
                 newsList=dataSnapshot.getValue(genericTypeIndicator);
 
-                NewsListAdapter adapter = new NewsListAdapter(MainActivity.this, R.layout.list_item, newsList);
+                News dayNews = getDayNew(newsList);
+                Bitmap bitmap = getBitmapFromAsset(dayNews.getImage());
+                dayNewsImage.setImageBitmap(bitmap);
+
+                TextView title = (TextView)findViewById(R.id.textTitleP);
+                title.setText(dayNews.getTitle());
+
+                news_id = dayNews.getId();
+
+
+                NewsListAdapter adapter = new NewsListAdapter(MainActivity.this, R.layout.list_item, getOtherNews(newsList));
                 lv.setAdapter(adapter);
             }
 
@@ -105,6 +148,43 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    }
+
+    private List<News> getOtherNews(List<News> pList){
+        List<News> tempList = new ArrayList<News>();
+        for(int i = 0; i < pList.size(); i++){
+            News temNews = pList.get(i);
+            String body  = temNews.getBody();
+            String title  = temNews.getTitle();
+            if(temNews.getDayNews() == 0){
+                tempList.add(temNews);
+            }
+        }
+        return tempList;
+    }
+    private News getDayNew(List<News> pList){
+        News temNews = new News();
+        for(int i = 0; i < pList.size(); i++){
+            temNews = pList.get(i);
+            int cd = temNews.getDayNews();
+            if(cd == 1){
+                return temNews;
+            }
+        }
+        return temNews;
+    }
+
+    private Bitmap getBitmapFromAsset(String pImg) {
+        AssetManager assetManager = MainActivity.this.getAssets();
+        InputStream stream = null;
+
+        try {
+            stream = assetManager.open(pImg);
+            return BitmapFactory.decodeStream(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private void inflateViews(){
@@ -150,8 +230,10 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
             case HISTORY:
+                drawer.closeDrawer(GravityCompat.START);
+                Intent intentH = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(intentH);
                 break;
-
             case CHALLENGE:
                 drawer.closeDrawer(GravityCompat.START);
                 //accountMenu.setVisible(true);

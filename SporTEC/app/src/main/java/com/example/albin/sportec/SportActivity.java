@@ -15,7 +15,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SportActivity extends AppCompatActivity {
@@ -26,7 +25,7 @@ public class SportActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.sport_screen);
+    setContentView(R.layout.activity_sport_screen);
 
         DatabaseReference myRef = MainActivity.database.getReference("Sports");
 
@@ -63,33 +62,5 @@ public class SportActivity extends AppCompatActivity {
         });
     }
 
-    private List<Sports> getAllItemObject(){
-        Sports itemObject = null;
-        List<Sports> items = new ArrayList<>();
-        items.add(new Sports("Image One", "challenge_icon"));
-        items.add(new Sports("Image Two", "two"));
-        items.add(new Sports("Image Three", "three"));
-        items.add(new Sports("Image Four", "four"));
-        items.add(new Sports("Image Five", "five"));
-        items.add(new Sports("Image Six", "six"));
-        items.add(new Sports("Image Seven", "seven"));
-        items.add(new Sports("Image Eight", "eight"));
-        items.add(new Sports("Image One", "one"));
-        items.add(new Sports("Image Two", "two"));
-        items.add(new Sports("Image Three", "three"));
-        items.add(new Sports("Image Four", "four"));
-        items.add(new Sports("Image Five", "five"));
-        items.add(new Sports("Image Six", "six"));
-        items.add(new Sports("Image Seven", "seven"));
-        items.add(new Sports("Image Eight", "eight"));
-        items.add(new Sports("Image One", "one"));
-        items.add(new Sports("Image Two", "two"));
-        items.add(new Sports("Image Three", "three"));
-        items.add(new Sports("Image Four", "four"));
-        items.add(new Sports("Image Five", "five"));
-        items.add(new Sports("Image Six", "six"));
-        items.add(new Sports("Image Seven", "seven"));
-        items.add(new Sports("Image Eight", "eight"));
-        return items;
-    }
+
 }

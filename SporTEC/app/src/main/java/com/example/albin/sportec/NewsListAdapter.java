@@ -65,4 +65,5 @@ public class NewsListAdapter extends ArrayAdapter<News> {
         }
     }
 
+
 }

@@ -1,12 +1,13 @@
 package com.example.albin.sportec.Model;
 
 public class Sports{
-
     private String sport;
     private String image;
+    private Long id;
 
-    public Sports(String content, String imageResource) {
+    public Sports(Long pId,String content, String imageResource) {
         this.sport = content;
+        this.id = pId;
         this.image = imageResource;
     }
 
@@ -14,19 +15,16 @@ public class Sports{
 
     }
 
-    public String getContent() {
+    public Long getId() {
+        return id;
+    }
+    public String getSport() {
         return sport;
     }
 
-    public void setContent(String content) {
-        this.sport = content;
-    }
-
-    public String getImageResource() {
+    public String getImage() {
         return image;
     }
 
-    public void setImageResource(String imageResource) {
-        this.image = imageResource;
-    }
+
 }
